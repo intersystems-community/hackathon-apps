@@ -19,7 +19,7 @@ spec:
       shareProcessNamespace: true
       containers:
       - name: iris
-        image: eu.gcr.io/hackathon-297608/myardyas-covid-19@sha256:b7cc362d6a252dc10cb4397566e936faec052ac3957cc8726402bda4bdaaeac6
+        image: eu.gcr.io/hackathon-297608/myardyas-covid-19:b7cc362d6a252dc10cb4397566e936faec052ac3957cc8726402bda4bdaaeac6
         ports:
         - containerPort: 51773
         - containerPort: 52773
