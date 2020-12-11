@@ -25,3 +25,10 @@ spec:
         - containerPort: 51773
         - containerPort: 52773
         - containerPort: 53773
+        resources:
+          requests:
+            cpu: 300m
+            memory: 1500Mi
+          limits:
+            cpu: 1000m
+            memory: 1500Mi
