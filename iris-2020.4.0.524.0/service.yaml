@@ -9,12 +9,15 @@ spec:
   selector:
     app: iris
   ports:
-  - name: "51773"
-    port: 51773
-    targetPort: 51773
+  - name: "1972"
+    port: 1972
+    targetPort: 1972
   - name: "52773"
     port: 52773
     targetPort: 52773
   - name: "53773"
     port: 53773
     targetPort: 53773
+  - name: "54773"
+    port: 54773
+    targetPort: 54773
