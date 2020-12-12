@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: iris
+  namespace: dc-analytics
+spec:
+  serviceName: iris
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: iris
+  template:
+    metadata:
+      labels:
+        app: iris
+    spec:
+      volumes:
+      - name: iris-secrets
+        secret:
+          secretName: iris-secrets
+      containers:
+      - image: eu.gcr.io/hackathon-297608/intersystems-community-dc-analytics
+        name: iris
+        ports:
+        - containerPort: 52773
+          name: web
+        env:
+        - name: ISC_DATA_DIRECTORY
+          value: /opt/isc/dur
+        readinessProbe:
+          httpGet:
+            path: /csp/sys/UtilHome.csp
+            port: 52773
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /csp/sys/UtilHome.csp
+            port: 52773
+          periodSeconds: 30
+        volumeMounts:
+        - mountPath: /opt/isc
+          name: iris
+        - mountPath: /etc/iris-secrets
+          name: iris-secrets
+  volumeClaimTemplates:
+  - metadata:
+      name: iris
+      namespace: iris
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+
